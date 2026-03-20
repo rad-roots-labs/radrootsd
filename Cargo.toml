@@ -3,7 +3,7 @@ name = "radrootsd"
 version = "0.1.0"
 edition = "2024"
 authors = ["triesap npub1tr33s4tj2le2kk9yzhfphdtss26gyn8kv7savnnjhj794nqp333q8e7grr"]
-rust-version = "1.88.0"
+rust-version = "1.92.0"
 license = "AGPL-3.0"
 description = "Radroots daemon binary"
 
