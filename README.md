@@ -10,7 +10,7 @@ _a Radroots bridge and write-plane daemon with optional NIP-46 JSON-RPC control_
 
 ## Overview
 
-radrootsd is the Radroots bridge and write-plane daemon. It exposes authenticated JSON-RPC ingress for canonical Radroots event publishing, and it can optionally expose public `nip46.*` JSON-RPC control when that surface is explicitly enabled. Relay-backed NIP-46 listener behavior remains available for Nostr-native flows.
+radrootsd is the Radroots bridge and write-plane daemon. It exposes authenticated JSON-RPC ingress for canonical Radroots event publishing, including listing publication and listing-backed order requests, and it can optionally expose public `nip46.*` JSON-RPC control when that surface is explicitly enabled. Relay-backed NIP-46 listener behavior remains available for Nostr-native flows.
 
 ## Local identity
 
