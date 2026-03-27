@@ -2,7 +2,7 @@
 
 # radrootsd
 
-_a Radroots daemon for NIP-46 signing and JSON-RPC transport_
+_a Radroots bridge and write-plane daemon with optional NIP-46 JSON-RPC control_
 
 <p align="center"><a href="https://opensource.org/license/agpl-v3"><img src="https://img.shields.io/badge/license-AGPLv3-blue.svg"></a></p>
 
@@ -10,7 +10,7 @@ _a Radroots daemon for NIP-46 signing and JSON-RPC transport_
 
 ## Overview
 
-radrootsd is a Nostr NIP-46 signing daemon that exposes JSON-RPC and relay-backed transport for Radroots clients.
+radrootsd is the Radroots bridge and write-plane daemon. It exposes authenticated JSON-RPC ingress for canonical Radroots event publishing, and it can optionally expose public `nip46.*` JSON-RPC control when that surface is explicitly enabled. Relay-backed NIP-46 listener behavior remains available for Nostr-native flows.
 
 ## Local identity
 
