@@ -12,7 +12,24 @@ _a Radroots bridge and write-plane daemon with optional NIP-46 JSON-RPC control_
 
 radrootsd is the Radroots bridge and write-plane daemon. It exposes authenticated JSON-RPC ingress for canonical Radroots event publishing, including listing publication and listing-backed order requests, and it can optionally expose public `nip46.*` JSON-RPC control when that surface is explicitly enabled. Relay-backed NIP-46 listener behavior remains available for Nostr-native flows.
 
-Bridge jobs and idempotency records persist at `config.bridge.state_path`, so restart does not lose accepted work. Bridge publish methods default to the embedded service identity signer, but they can also target an already-connected outbound NIP-46 session by passing `signer_session_id`.
+Bridge jobs and idempotency records persist at `config.bridge.state_path`. Bridge publish methods default to the embedded service identity signer, but they can also target an already-connected outbound NIP-46 session by passing `signer_session_id`.
+
+## Bridge Job Lifecycle
+
+Bridge write commands expose one durable lifecycle:
+
+- `accepted`: the request has been reserved and is still in-flight in the current process. This state is non-terminal.
+- `published`: terminal success. The event was signed and the configured delivery policy was satisfied.
+- `failed`: terminal failure. This includes post-reservation contract/signing failures, relay publish failures, and restart recovery of interrupted accepted jobs.
+
+Bridge APIs now expose a stable lifecycle view:
+
+- `terminal`: whether the job is terminal
+- `recovered_after_restart`: whether a failed job was terminalized during startup recovery because the previous process died before completion
+
+`bridge.status` reports retained job counts by lifecycle state, including `recovered_failed_jobs`. `bridge.job.status` and bridge publish responses return the same stable job view, so clients do not need to infer lifecycle semantics from raw store internals.
+
+Accepted jobs are not resumable across restart. If radrootsd restarts before publish completion, startup recovery converts those jobs into terminal `failed` records with the summary `bridge publish did not complete before process restart`.
 
 ## Local identity
 
