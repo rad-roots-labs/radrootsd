@@ -27,7 +27,14 @@ Bridge APIs now expose a stable lifecycle view:
 - `terminal`: whether the job is terminal
 - `recovered_after_restart`: whether a failed job was terminalized during startup recovery because the previous process died before completion
 
-`bridge.status` reports retained job counts by lifecycle state, including `recovered_failed_jobs`. `bridge.job.status` and bridge publish responses return the same stable job view, so clients do not need to infer lifecycle semantics from raw store internals.
+`bridge.status` reports retained job counts by lifecycle state, including `recovered_failed_jobs`. It also reports bridge signer capability truthfully:
+
+- `signer_mode`: `selectable_per_request`
+- `default_signer_mode`: `embedded_service_identity`
+- `supported_signer_modes`: `["embedded_service_identity", "nip46_session"]`
+- `available_nip46_signer_sessions`: current count of outbound remote-signer sessions the bridge could target immediately
+
+`bridge.job.status` and bridge publish responses return the same stable job view, so clients do not need to infer lifecycle semantics from raw store internals.
 
 Accepted jobs are not resumable across restart. If radrootsd restarts before publish completion, startup recovery converts those jobs into terminal `failed` records with the summary `bridge publish did not complete before process restart`.
 
