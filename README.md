@@ -43,6 +43,22 @@ Accepted jobs are not resumable across restart. If radrootsd restarts before pub
 `identity.json` is local-only secret material and is intentionally not tracked.
 Use `identity.example.json` as the template for your local identity file.
 
+## Validation
+
+This repository uses Nix as the canonical local validation surface:
+
+```bash
+nix run .#fmt
+nix run .#check
+nix run .#test
+```
+
+Enter the repo shell when you need narrower ad hoc cargo commands:
+
+```bash
+nix develop
+```
+
 ## Coverage
 
 Coverage policy and thresholds are defined in:
