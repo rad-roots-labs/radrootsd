@@ -59,22 +59,7 @@ Enter the repo shell when you need narrower ad hoc cargo commands:
 nix develop
 ```
 
-## Coverage
-
-Coverage policy and thresholds are defined in:
-- `contract/coverage/POLICY.md`
-- `contract/coverage/thresholds.toml`
-- `contract/coverage/include.txt`
-
-Run a coverage report:
-```bash
-make coverage-report
-```
-
-Run the strict gate:
-```bash
-make coverage-gate
-```
+Some adopting platforms may run stricter downstream viability overlays, including coverage enforcement, but those maintainer-only gates are not part of this repo's local contributor contract.
 
 ## License
 

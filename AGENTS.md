@@ -6,7 +6,7 @@
 - do not add temporary local path dependencies from this repo to archived code, `refs/*`, or private platform crates without explicit approval
 - read `README.md` and `docs/nix.md` before broad edits
 - validate from this repo root with `nix run .#check` and `nix run .#test`
-- use the existing coverage commands when coverage-affecting or release-affecting work needs them
+- do not add or restore repo-local contract or coverage policy trees; this repo owns only its checked-in Nix validation surface
 - use raw cargo commands only for narrower follow-up work after entering `nix develop`
 - toolchain: Rust 1.92, edition 2024
 - avoid `unsafe`
