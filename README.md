@@ -12,7 +12,15 @@ _a Radroots bridge and write-plane daemon with optional NIP-46 JSON-RPC control_
 
 radrootsd is the Radroots bridge and write-plane daemon. It exposes authenticated JSON-RPC ingress for canonical Radroots event publishing, including listing publication and listing-backed order requests, and it can optionally expose public `nip46.*` JSON-RPC control when that surface is explicitly enabled. Relay-backed NIP-46 listener behavior remains available for Nostr-native flows.
 
-Bridge jobs and idempotency records persist at `config.bridge.state_path`. Bridge publish methods default to the embedded service identity signer, but they can also target an already-connected outbound NIP-46 session by passing `signer_session_id`.
+Bridge jobs and idempotency records persist at `config.bridge.state_path`.
+
+Bridge signer selection now has two distinct postures:
+
+- actor-authored durable market writes such as listing publication and listing-backed order requests
+  must target an already-connected outbound NIP-46 session by passing `signer_session_id`
+- embedded service signing remains valid only for service-authored write flows
+
+Actor-authored bridge writes must not silently fall back to the embedded service identity.
 
 ## Runtime Config
 
