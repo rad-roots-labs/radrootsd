@@ -14,6 +14,40 @@ radrootsd is the Radroots bridge and write-plane daemon. It exposes authenticate
 
 Bridge jobs and idempotency records persist at `config.bridge.state_path`. Bridge publish methods default to the embedded service identity signer, but they can also target an already-connected outbound NIP-46 session by passing `signer_session_id`.
 
+## Runtime Config
+
+`radrootsd` loads its runtime configuration from the canonical `config.toml` path for the active
+runtime profile unless `--config` is passed explicitly.
+
+Default profile posture:
+
+- manual operator runs default to `interactive_user`
+- managed-service wrappers should set `RADROOTSD_PATHS_PROFILE=service_host`
+- repo-local labs may set `RADROOTSD_PATHS_PROFILE=repo_local` together with
+  `RADROOTSD_PATHS_REPO_LOCAL_ROOT`
+
+Canonical default config locations:
+
+- macOS/Linux `interactive_user`: `~/.radroots/config/services/radrootsd/config.toml`
+- Windows `interactive_user`: `%APPDATA%\\Radroots\\config\\services\\radrootsd\\config.toml`
+- `service_host`: `/etc/radroots/services/radrootsd/config.toml`
+
+The checked-in `config.toml` is a profile-aware sample. Copy it into the resolved runtime
+location for your posture and change only the non-path settings that need to vary:
+
+```bash
+cp config.toml /etc/radroots/services/radrootsd/config.toml
+```
+
+When you keep the canonical profile-derived defaults, `radrootsd` will derive:
+
+- logs under the runtime logs root
+- bridge state under the runtime data root
+- the encrypted local service identity under the runtime secrets root
+
+Only set `logs_dir`, `bridge.state_path`, or `--identity` when you intentionally want a
+non-canonical override.
+
 ## Bridge Job Lifecycle
 
 Bridge write commands expose one durable lifecycle:
@@ -40,8 +74,17 @@ Accepted jobs are not resumable across restart. If radrootsd restarts before pub
 
 ## Local identity
 
-`identity.json` is local-only secret material and is intentionally not tracked.
-Use `identity.example.json` as the template for your local identity file.
+The canonical local service identity is an encrypted envelope, not a tracked plaintext file.
+
+Default identity locations:
+
+- macOS/Linux `interactive_user`: `~/.radroots/secrets/services/radrootsd/identity.secret.json`
+- Windows `interactive_user`: `%APPDATA%\\Radroots\\secrets\\services\\radrootsd\\identity.secret.json`
+- `service_host`: `/etc/radroots/secrets/services/radrootsd/identity.secret.json`
+
+Use `--allow-generate-identity` to create the encrypted identity envelope when the configured path
+is missing. `identity.example.json` only documents the plaintext identity JSON shape; it is not the
+canonical live daemon secret file.
 
 ## Validation
 
