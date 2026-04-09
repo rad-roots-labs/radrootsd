@@ -1,0 +1,13 @@
+# radrootsd
+
+This is the README for `radrootsd` which is a long-running daemon that enables
+authenticated publishing and optional NIP-46 control on Rad Roots networks.
+
+## Copyright
+
+Except as otherwise noted, all files in the `radrootsd` distribution are
+
+    Copyright (c) 2020-2026 Tyson Lupul and others.
+
+For information on usage and redistribution, and for a DISCLAIMER OF ALL
+WARRANTIES, see LICENSE included in the `radrootsd` distribution.
