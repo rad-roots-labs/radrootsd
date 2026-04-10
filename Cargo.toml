@@ -11,28 +11,28 @@ description = "Radroots daemon binary"
 resolver = "2"
 
 [workspace.dependencies]
-radroots-core = { path = "../../../../foundation/libs/rs/radroots/crates/core" }
-radroots-events = { path = "../../../../foundation/libs/rs/radroots/crates/events" }
-radroots-events-codec = { path = "../../../../foundation/libs/rs/radroots/crates/events-codec" }
-radroots-identity = { path = "../../../../foundation/libs/rs/radroots/crates/identity" }
-radroots-nostr = { path = "../../../../foundation/libs/rs/radroots/crates/nostr" }
-radroots-nostr-signer = { path = "../../../../foundation/libs/rs/radroots/crates/nostr-signer" }
-radroots-runtime = { path = "../../../../foundation/libs/rs/radroots/crates/runtime" }
-radroots-trade = { path = "../../../../foundation/libs/rs/radroots/crates/trade" }
+radroots_core = { path = "../../../../foundation/libs/rs/radroots/crates/core" }
+radroots_events = { path = "../../../../foundation/libs/rs/radroots/crates/events" }
+radroots_events_codec = { path = "../../../../foundation/libs/rs/radroots/crates/events_codec" }
+radroots_identity = { path = "../../../../foundation/libs/rs/radroots/crates/identity" }
+radroots_nostr = { path = "../../../../foundation/libs/rs/radroots/crates/nostr" }
+radroots_nostr_signer = { path = "../../../../foundation/libs/rs/radroots/crates/nostr_signer" }
+radroots_runtime = { path = "../../../../foundation/libs/rs/radroots/crates/runtime" }
+radroots_trade = { path = "../../../../foundation/libs/rs/radroots/crates/trade" }
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(coverage_nightly)'] }
 
 [dependencies]
-radroots-core = { workspace = true, features = ["std", "serde", "typeshare"]  }
-radroots-events = { workspace = true, features = ["serde"] }
-radroots-events-codec = { workspace = true, features = ["nostr", "serde_json"] }
-radroots-identity = { workspace = true }
-radroots-nostr = { workspace = true, features = ["client", "codec", "events", "http"] }
-radroots-nostr-signer = { workspace = true }
-radroots-runtime = { workspace = true, features = ["cli"] }
-radroots-runtime-paths = { path = "../../../../foundation/libs/rs/radroots/crates/runtime-paths" }
-radroots-trade = { workspace = true }
+radroots_core = { workspace = true, features = ["std", "serde", "typeshare"]  }
+radroots_events = { workspace = true, features = ["serde"] }
+radroots_events_codec = { workspace = true, features = ["nostr", "serde_json"] }
+radroots_identity = { workspace = true }
+radroots_nostr = { workspace = true, features = ["client", "codec", "events", "http"] }
+radroots_nostr_signer = { workspace = true }
+radroots_runtime = { workspace = true, features = ["cli"] }
+radroots_runtime_paths = { path = "../../../../foundation/libs/rs/radroots/crates/runtime_paths" }
+radroots_trade = { workspace = true }
 nostr = { version = "0.44.2", features = ["nip46"] }
 
 anyhow = { version = "1" }
